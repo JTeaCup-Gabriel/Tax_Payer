@@ -22,9 +22,21 @@ public class Individual extends TaxPayer {
 	}
 
 	@Override
-	public double tax() {
-		// TODO Auto-generated method stub
-		return 0;
+	public final double tax() {
+
+		double finalTaxCalc = anualIncome;
+
+		if (anualIncome < 20000) {
+
+			finalTaxCalc += finalTaxCalc * (15 / 100);
+
+		} else if (anualIncome > 2000) {
+
+			finalTaxCalc += (finalTaxCalc * (25 / 100)) - healthExpenditures / 2;
+
+		}
+
+		return finalTaxCalc;
 	}
 
 }
