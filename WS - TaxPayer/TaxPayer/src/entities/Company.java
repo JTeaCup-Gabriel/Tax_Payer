@@ -1,6 +1,9 @@
 package entities;
 
+import java.text.DecimalFormat;
+
 public class Company extends TaxPayer {
+	private static DecimalFormat df = new DecimalFormat("0.00");
 
 	private Integer numberOfEmployees;
 
@@ -24,19 +27,34 @@ public class Company extends TaxPayer {
 	@Override
 	public final double tax() {
 
-		double finalTaxCalc = anualIncome;
+		double res = anualIncome;
 
-		if (numberOfEmployees < 10) {
+		int cx = (numberOfEmployees <= 10) ? 1 : 2;
 
-			anualIncome += anualIncome * (16 / 100);
+		switch (cx) {
 
-		} else if (numberOfEmployees > 10) {
+		case 1:
 
-			anualIncome += anualIncome * (14 / 100);
+			res = anualIncome * 0.16;
+			break;
 
+		case 2:
+			
+			res = anualIncome * 0.14;
+			break;
 		}
 
-		return finalTaxCalc;
+		return res;
+	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(name + ": $ " + df.format(tax()));
+
+		return sb.toString();
 	}
 
 }

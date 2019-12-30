@@ -1,6 +1,9 @@
 package entities;
 
+import java.text.DecimalFormat;
+
 public class Individual extends TaxPayer {
+	private static DecimalFormat df = new DecimalFormat("0.00");
 
 	private Double healthExpenditures;
 
@@ -24,19 +27,36 @@ public class Individual extends TaxPayer {
 	@Override
 	public final double tax() {
 
-		double finalTaxCalc = anualIncome;
+		double res = anualIncome;
 
-		if (anualIncome < 20000) {
+		int cx = (anualIncome <= 20000) ? 1 : 2;
 
-			finalTaxCalc += finalTaxCalc * (15 / 100);
+		switch (cx) {
 
-		} else if (anualIncome > 2000) {
+		case 1:
 
-			finalTaxCalc += (finalTaxCalc * (25 / 100)) - healthExpenditures / 2;
+			res = anualIncome * 0.15;
+			break;
 
+		case 2:
+			double a = anualIncome * 0.25;
+			double b = healthExpenditures * 0.5;
+			res = a - b;
+			break;
 		}
 
-		return finalTaxCalc;
+		return res;
+
+	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(name + ": $ " + df.format(tax()));
+
+		return sb.toString();
 	}
 
 }
