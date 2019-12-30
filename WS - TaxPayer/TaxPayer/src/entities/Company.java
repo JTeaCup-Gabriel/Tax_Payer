@@ -32,14 +32,12 @@ public class Company extends TaxPayer {
 		int cx = (numberOfEmployees <= 10) ? 1 : 2;
 
 		switch (cx) {
-
+		
 		case 1:
-
 			res = anualIncome * 0.16;
 			break;
 
 		case 2:
-			
 			res = anualIncome * 0.14;
 			break;
 		}

@@ -17,15 +17,14 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		DecimalFormat df = new DecimalFormat("0.00");
 		Scanner sc = new Scanner(System.in);
+		
 		List<TaxPayer> list = new ArrayList<TaxPayer>();
-		// -------------------------------------------------------------------- >
+		
 		System.out.print("Enter the number of tax payers: ");
 		int N = sc.nextInt();
-		// -------------------------------------------------------------------- >
 		for (int i = 1; i <= N; i++) {
 
 			System.out.println("Tax payer #" + i + " data:");
-
 			System.out.print("Individual or company (i/c)? ");
 			char type = sc.next().toLowerCase().charAt(0);
 			sc.nextLine();
@@ -35,54 +34,42 @@ public class Program {
 			double anualIncome = sc.nextDouble();
 
 			int cx = (type == 'i') ? 1 : (type == 'c') ? 2 : 0;
-
 			switch (cx) {
 
 			case 1:
-				// Individual
-				// System.out.println("individual");
+				
 				System.out.print("Health expenditures: ");
 				double healthExpenditures = sc.nextDouble();
-
-				TaxPayer TPI = new Individual(name, anualIncome, healthExpenditures);
-				list.add(TPI);
-
+				list.add(new Individual(name, anualIncome, healthExpenditures));
 				break;
 
 			case 2:
-				// Company
-				// System.out.println("company");
+				
 				System.out.print("Number of employees: ");
 				int numberOfEmployees = sc.nextInt();
-
-				TaxPayer TPC = new Company(name, anualIncome, numberOfEmployees);
-				list.add(TPC);
-
+				list.add(new Company(name, anualIncome, numberOfEmployees));
 				break;
 
 			}
 
 		}
-		// -------------------------------------------------------------------- >
+
 		System.out.println("\nTAXES PAID:");
-		// -------------------------------------------------------------------- >
+
 		for (TaxPayer tP : list) {
-
 			System.out.println(tP.toString());
-
 		}
-		// -------------------------------------------------------------------- >
+
 		System.out.print("\nTOTAL TAXES: ");
 
 		double sum = 0;
 
 		for (TaxPayer tP : list) {
-
 			sum += tP.tax();
 		}
 
 		System.out.println("TOTAL TAXES: $ " + df.format(sum));
-		// -------------------------------------------------------------------- >
+
 		sc.close();
 
 	}

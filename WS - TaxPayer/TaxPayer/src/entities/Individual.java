@@ -39,9 +39,8 @@ public class Individual extends TaxPayer {
 			break;
 
 		case 2:
-			double a = anualIncome * 0.25;
-			double b = healthExpenditures * 0.5;
-			res = a - b;
+			
+			res = (anualIncome * 0.25) - (healthExpenditures * 0.5);
 			break;
 		}
 
