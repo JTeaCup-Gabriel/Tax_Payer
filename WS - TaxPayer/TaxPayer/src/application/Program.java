@@ -1,5 +1,6 @@
 package application;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -14,6 +15,7 @@ public class Program {
 	public static void main(String[] args) {
 
 		Locale.setDefault(Locale.US);
+		DecimalFormat df = new DecimalFormat("0.00");
 		Scanner sc = new Scanner(System.in);
 		List<TaxPayer> list = new ArrayList<TaxPayer>();
 		// -------------------------------------------------------------------- >
@@ -70,6 +72,16 @@ public class Program {
 
 		}
 		// -------------------------------------------------------------------- >
+		System.out.print("\nTOTAL TAXES: ");
+
+		double sum = 0;
+
+		for (TaxPayer tP : list) {
+
+			sum += tP.tax();
+		}
+
+		System.out.println("TOTAL TAXES: $ " + df.format(sum));
 		// -------------------------------------------------------------------- >
 		sc.close();
 
